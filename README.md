@@ -23,8 +23,8 @@ A TypeScript-based command-line Pokedex application that interfaces with the Pok
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/pokedex-cli.git
-cd pokedex-cli
+git clone https://github.com/denkasyanov/049-pokedex.git
+cd 049-pokedex
 
 # Install dependencies
 pnpm install
@@ -40,8 +40,8 @@ pnpm run dev
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/pokedex-cli.git
-cd pokedex-cli
+git clone https://github.com/denkasyanov/049-pokedex.git
+cd 049-pokedex
 
 # Install dependencies
 npm install
@@ -73,31 +73,10 @@ Once started, you'll enter an interactive REPL with the following commands:
 ```bash
 $ pnpm run dev
 Welcome to the Pokedex!
-pokedex > explore pallet-town-area
-Exploring pallet-town-area...
-Found Pokemon:
- - caterpie
- - metapod
- - pidgey
- - rattata
 
 pokedex > catch pikachu
 Throwing a Pokeball at pikachu...
 pikachu was caught!
-
-pokedex > inspect pikachu
-Name: pikachu
-Height: 4
-Weight: 60
-Stats:
- - hp: 35
- - attack: 55
- - defense: 40
- - special-attack: 50
- - special-defense: 50
- - speed: 90
-Types:
- - electric
 
 pokedex > pokedex
 Your Pokedex:
@@ -107,46 +86,102 @@ Total Pokemon caught: 1
 pokedex > exit
 ```
 
-## Architecture
+<details>
+<summary>Click to see a more detailed example session</summary>
 
-### Tech Stack
+```bash
+$ pnpm run dev
+Welcome to the Pokedex!
 
-- **Language**: TypeScript with ES modules
-- **Runtime**: Node.js
-- **Testing**: Vitest
-- **API**: PokeAPI v2
-- **CLI**: Node.js readline interface
+pokedex > help
+Available commands:
+ - help: Display this help message
+ - exit: Exit the Pokedex
+ - catch <pokemon>: Catch a Pokemon (50% chance)
+ - explore <area>: List Pokemon in a location area
+ - map: Show next 20 location areas
+ - mapb: Show previous 20 location areas
+ - pokedex: Show all your caught Pokemon
+ - inspect <pokemon>: View stats of a caught Pokemon
 
-### Project Structure
+pokedex > map
+ - canalave-city-area
+ - eterna-city-area
+ - pastoria-city-area
+ - sunyshore-city-area
+ - sinnoh-pokemon-league-area
+ - oreburgh-mine-1f
+ - valley-windworks-area
+ - eterna-forest-area
+ - fuego-ironworks-area
+ - mt-coronet-1f-route-207
+ - ... (20 areas total)
 
+pokedex > explore eterna-forest-area
+Exploring eterna-forest-area...
+Found Pokemon:
+ - buneary
+ - gastly
+ - hoothoot
+ - wurmple
+ - cascoon
+ - silcoon
+ - beautifly
+ - dustox
+
+pokedex > catch gastly
+Throwing a Pokeball at gastly...
+gastly escaped!
+
+pokedex > catch gastly
+Throwing a Pokeball at gastly...
+gastly was caught!
+
+pokedex > catch pikachu
+Throwing a Pokeball at pikachu...
+pikachu was caught!
+
+pokedex > inspect gastly
+Name: gastly
+Height: 13
+Weight: 1
+Stats:
+ - hp: 30
+ - attack: 35
+ - defense: 30
+ - special-attack: 100
+ - special-defense: 35
+ - speed: 80
+Types:
+ - ghost
+ - poison
+
+pokedex > inspect charizard
+You need to catch charizard first!
+
+pokedex > pokedex
+Your Pokedex:
+ - gastly (Base EXP: 62)
+ - pikachu (Base EXP: 112)
+Total Pokemon caught: 2
+
+pokedex > mapb
+ - pallet-town-area
+ - viridian-city-area
+ - pewter-city-area
+ - cerulean-city-area
+ - vermilion-city-area
+ - lavender-town-area
+ - celadon-city-area
+ - fuchsia-city-area
+ - saffron-city-area
+ - cinnabar-island-area
+ - ... (20 areas total)
+
+pokedex > exit
 ```
-├── src/
-│   ├── commands/       # Individual command implementations
-│   │   ├── catch.ts
-│   │   ├── explore.ts
-│   │   ├── help.ts
-│   │   ├── inspect.ts
-│   │   ├── map.ts
-│   │   └── pokedex.ts
-│   ├── cache.ts        # Caching system with TTL
-│   ├── commands.ts     # Command registry
-│   ├── main.ts         # Application entry point
-│   ├── pokeapi.ts      # API client with type definitions
-│   ├── repl.ts         # REPL implementation
-│   └── state.ts        # Application state management
-├── dist/               # Compiled JavaScript output
-├── tsconfig.json       # TypeScript configuration
-├── package.json        # Project dependencies
-└── CLAUDE.md          # Development guidelines
-```
 
-### Key Design Decisions
-
-1. **Command Pattern**: Each command is isolated in its own module for maintainability
-2. **State Management**: Centralized state object passed through command chain
-3. **Cache Implementation**: Time-based cache with configurable TTL to reduce API load
-4. **Type Safety**: Comprehensive TypeScript types for all API responses
-5. **Error Handling**: Graceful error handling for network failures and invalid inputs
+</details>
 
 ## Development
 
@@ -173,43 +208,13 @@ pnpm run build
 pnpm run build:watch
 ```
 
-## Pros & Cons
+### Scripts Explained
 
-### Pros
+- `pnpm run build` - Compiles TypeScript files from `src/` to JavaScript in `dist/`
+- `pnpm run dev` - Builds the project and immediately runs the compiled application
+- `pnpm run start` - Runs the previously compiled application from `dist/`
+- `pnpm run test` - Executes the Vitest test suite
 
-- **Educational**: Great for learning TypeScript, API integration, and CLI development
-- **Extensible**: Easy to add new commands following the established pattern
-- **Performance**: Efficient caching reduces API calls
-- **Type Safety**: Full TypeScript coverage prevents runtime errors
-- **Testing**: Comprehensive test suite ensures reliability
-- **Clean Code**: Modular architecture makes code easy to understand
-
-### Cons
-
-- **Limited Offline Support**: Requires internet connection for API calls
-- **No Persistence**: Data is lost when application exits (by design)
-- **Terminal Only**: No GUI interface
-- **Rate Limiting**: Subject to PokeAPI rate limits
-
-## Future Enhancements
-
-- Data persistence with SQLite or JSON file storage
-- Battle system implementation
-- Pokemon team management
-- Trading simulation
-- Advanced search and filtering
-- Colorized terminal output
-- Progress indicators for long-running operations
-
-## Contributing
-
-This project follows clean code principles and comprehensive testing. When adding new features:
-
-1. Follow the command pattern in `src/commands/`
-2. Add comprehensive tests
-3. Update types in `pokeapi.ts` if adding new API endpoints
-4. Maintain the existing code style
-5. Ensure all tests pass before submitting
 
 ## License
 
