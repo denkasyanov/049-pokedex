@@ -1,0 +1,24 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(fc-list:*)",
+      "Bash(ls:*)",
+      "Bash(find:*)",
+      "mcp__ide__getDiagnostics",
+      "Bash(pnpm run:*)",
+      "Bash(node:*)",
+      "Bash(rm:*)",
+      "Bash(npx tsc:*)",
+      "Bash(chmod:*)",
+      "Bash(./test-commands.sh)",
+      "Bash(rg:*)",
+      "Bash(npm run build:*)",
+      "Bash(npm test)",
+      "Bash(npm run dev:*)",
+      "Bash(cat:*)",
+      "Bash(grep:*)",
+      "Bash(npx vitest run:*)"
+    ],
+    "deny": []
+  }
+}
