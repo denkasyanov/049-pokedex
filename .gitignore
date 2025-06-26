@@ -1,0 +1,8 @@
+# User specific settings
+.vscode
+
+# Thank you javascript
+**/node_modules/
+
+# Generated files
+repl.log

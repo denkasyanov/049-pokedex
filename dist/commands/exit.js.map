@@ -1,0 +1,1 @@
+{"version":3,"file":"exit.js","sourceRoot":"","sources":["../../src/commands/exit.ts"],"names":[],"mappings":"AAEA,MAAM,CAAC,KAAK,UAAU,WAAW,CAAC,KAAY;IAC5C,OAAO,CAAC,GAAG,CAAC,iCAAiC,CAAC,CAAC;IAC/C,KAAK,CAAC,IAAI,CAAC,KAAK,EAAE,CAAC;IACnB,OAAO,CAAC,IAAI,CAAC,CAAC,CAAC,CAAC;AAClB,CAAC"}
